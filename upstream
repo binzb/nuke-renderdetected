@@ -64,11 +64,11 @@ def DeadlineErrorDetection(nodes):
     global fill
     
     
-    SOURCE = get_Disklist()       #local disk_list
+    SOURCE_localDisk = get_Disklist()       #local disk_list
     SOURCE2 = ''
-    SOURCE3 = ['OFXuk.co.thefoundry.tinderbox','WorldPos_Lambert_Shader_ik','AFXGlow.gizmo']    #Plugin not in server
+    SOURCE3_Plugin = ['OFXuk.co.thefoundry.tinderbox','WorldPos_Lambert_Shader_ik','AFXGlow.gizmo']    #Plugin not in server
     SOURCE4 = ['.####.']
-    SOURCE5 = ['%d','%02d','%03d','%04d','%05d','%06d','%07d','%08d','#','##','###','####','#####','######','#######','########']
+    SOURCE5_seq = ['%d','%02d','%03d','%04d','%05d','%06d','%07d','%08d','#','##','###','####','#####','######','#######','########']
     
     nodeList = selectConnectedNodes(nodes)
     
@@ -76,4 +76,51 @@ def DeadlineErrorDetection(nodes):
     #unselected or bug 
     
     for uns in nodeList:
-        if not uns.Class() ==
+        if not uns.Class() == nodes.Class():
+            uns['selected'].setValue(False)
+            
+    
+    #Read 
+    
+    w = nuke.allNodes('Write')
+    
+    readOne = ['Read','ReadGeo2','Camera2']
+    
+    Ra = []
+    
+    for rs in nodeList:
+        if (rs.Class() == 'Read' or rs.Class() == 'ReadGeo2' or rs.Class() == 'Camera2'):
+            Ra.append(rs)
+            
+            
+    for s in Ra:
+        
+        if s.Class() == 'Camera2':
+            if not s['read_from_file'].getValue():
+                continue
+            
+        #singe read
+        
+        pat = ''
+        ispath = 1 
+        for sr in SOURCE5_seq:
+            if re.search(sr,s['file'].getValue()):
+                ispath = 0 
+                pat = sr
+                break
+            
+        if ispath == 1:
+            newpath = s['file'].getValue()
+            if not os.path.isfile(newpath):
+                if not(re.search(str(s.name()),str(ErrorRead))):
+                    ErrorRead.append(s.name())
+                    
+                Readtwo = 1 
+                
+                
+                
+        #sequence
+        
+        for s2 in SOURCE_localDisk:
+            
+            if(re.match)
