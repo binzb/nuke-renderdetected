@@ -172,7 +172,7 @@ class Panel(QMainWindow):
         
     def set_style_sheet(self):
         
-        text = open('..\..\style.txt').read()
+        text = open('./style.txt').read()
         self.setStyleSheet(text)
         
     def fresh(self):
