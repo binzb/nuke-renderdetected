@@ -47,3 +47,33 @@ def get_Disklist():
         if re.search(disk,s):
             disk_list.append(disk)
     return disk_list
+    
+    
+def DeadlineErrorDetection(nodes):
+    
+    
+    global er1
+    global ProxyOne
+    global ErrorRead
+    global Readtwo
+    global Pluginthree
+    global WriteFourth
+    global ErrorPlugin
+    global ErrorWrite
+    global rootError
+    global fill
+    
+    
+    SOURCE = get_Disklist()       #local disk_list
+    SOURCE2 = ''
+    SOURCE3 = ['OFXuk.co.thefoundry.tinderbox','WorldPos_Lambert_Shader_ik','AFXGlow.gizmo']    #Plugin not in server
+    SOURCE4 = ['.####.']
+    SOURCE5 = ['%d','%02d','%03d','%04d','%05d','%06d','%07d','%08d','#','##','###','####','#####','######','#######','########']
+    
+    nodeList = selectConnectedNodes(nodes)
+    
+    
+    #unselected or bug 
+    
+    for uns in nodeList:
+        if not uns.Class() ==
