@@ -123,4 +123,32 @@ def DeadlineErrorDetection(nodes):
         
         for s2 in SOURCE_localDisk:
             
-            if(re.match)
+            if(re.match(s2,s['file'].getValue() or not os.path.exists(os.path.dirname(s['file'].getValue()))):
+                if not(re.search(str(s.name()),str(ErrorRead))):
+                    ErrorRead.append(s.name())
+                Readtwo = 1 
+                
+                
+                
+                
+    #Plugin
+    
+    
+    for s2 in nodeList:
+        if s2.Class() != 'Read':
+            for i in SOURCE3_Plugin:
+                if re.search(i,s2.Class()) and s2.name() not in ErrorPlugin:
+                    ErrorPlugin.append(s2.name())
+                    Pluginthree = 1 
+                    
+    for sss in nuke.allNodes():
+        if sss.Class() == "EdgeKey" and sss.name() not in ErrorPlugin and p['colorManagement'].value() == 'OCIO':
+            ErrorPlugin.append(sss.name())
+            Pluginthree = 1 
+            
+            
+            
+    #Write
+    
+    
+    
