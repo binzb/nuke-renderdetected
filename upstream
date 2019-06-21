@@ -151,4 +151,99 @@ def DeadlineErrorDetection(nodes):
     #Write
     
     
+    if(re.search('\.',nodes['file'].getValue())is not None):
+        
+        if nodes['file'].getValue().split('.')[-1].lower() == nodes['file_type'].value():
+            WriteFourth = 2 
+        else:
+            WriteFourth = 1 
+            ErrorWrite.append(nodes.name())
+            
+    else:
+        ErrorWrite.append(nodes.name())
+        print ErrorWrite
+        WriteFourth = 1 
+    if(re.search(' ',nodes['file'].getValue()) and (nodes.name() not in ErrorWrite)):
+        WriteFourth = 1 
+        print ErrorWrite
+        ErrorWrite.append(nodes.name())
+        
+    for s31 in SOURCE_localDisk:
+        if(re.match(s31,nodes['file'].getValue()) and (nodes.name() not in ErrorWrite)):
+            ErrorWrite.append(nodes.name())
+            WriteFourth = 1 
+            
+            
+            
+            
+            
+def Deteting(id = 1):
     
+    global p 
+    global er1
+    global er0
+    global ProxyOne
+    global ErrorRead
+    global Readtwo
+    global Pluginthree
+    global WriteFourth
+    global ErrorPlugin
+    global ErrorWrite
+    global rootError
+    
+    
+    
+    
+    
+    nodes = nuke.selectedNodes()
+    
+    print nodes
+    
+    
+    if len(nodes)<=0:
+        nuke.message("No nodes selected")
+        
+        return [1],[1],[1]
+    else:
+        for i in nodes:
+            if i.Class() != 'Write':
+                nuke.message(i.name()+"is not WriteNode")
+                return [1],[1],[1]
+                
+                
+                
+    SOURCE_localDisk = get_Disklist()
+    
+    for rn in SOURCE_localDisk:
+        if re.match(rn,p['name'].getValue()):
+            er0 = '<font color = "#f9efca"  size = "3"> project not in server\n\n'
+            rootError = 1 
+            
+            
+    if (p['proxy'].getValue() == 1):
+        
+        er1 = '<font color = "#f9efca"  size = "3"> You had  opened the proxy\n\n'
+        
+        ProxyOne = 1 
+        
+    else:
+        er1 = ""
+        
+    for sel in nodes:
+        
+        DeadlineErrorDetection(sel)
+        
+        
+        
+    #message
+    
+    if(ProxyOne == 1 or Readtwo == 1 or Pluginthree == 1 or WriteFourth == 1 or rootError == 1):
+        
+        
+        if len(ErrorPlugin):
+            er3 = str(ErrorPlugin)+'\n\n\n'+'The Plugin has not intall'
+        else:
+            er3 = ""
+            
+        if len(ErrorRead):
+            er2 = str(ErrorPlugin)+'\n\n\n'+'The Plugin has not intall'
