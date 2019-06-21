@@ -46,3 +46,4 @@ def get_Disklist():
         disk = c+':'
         if re.search(disk,s):
             disk_list.append(disk)
+    return disk_list
