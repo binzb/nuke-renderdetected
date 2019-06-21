@@ -6,6 +6,8 @@ import re
 import nukescripts
 import psutil
 import string
+
+
 er1 = ''
 er2 = ''
 ProxyOne = 0
@@ -246,4 +248,43 @@ def Deteting(id = 1):
             er3 = ""
             
         if len(ErrorRead):
-            er2 = str(ErrorPlugin)+'\n\n\n'+'The Plugin has not intall'
+            er2 = str(ErrorPlugin)+'\n\n\n'+'The read nodes is not in server'
+        else:
+            er2 = ""
+            
+        if len(ErrorWrite):
+            er4 = str(ErrorWrite) + '\n\n\n' + 'The path have some problem'
+        else:
+            er4 = ""
+            
+        for resel in nodes:
+            resel['selected'].setValue(True)
+            
+            
+        if id == 1:
+            nuke.message(er0 + '\n\n\n' + er1 +'\n\n\n' + er2 + '\n\n\n' + er3 + '\n\n\n' + er4 + '\n\n\n' + '\n\n\n' + op)
+            
+            
+            
+    Rread = ErrorRead
+    RWrite = ErrorWrite
+    RPlugin = ErrorPlugin
+    return Rread,RWrite,RPlugin
+    
+    
+    #Reset 
+    
+    
+    Readtwo = 0 
+    ProxyOne = 0 
+    Pluginthree = 0 
+    rootError = 0 
+    WriteFourth = 2 
+    ErrorRead = []
+    ErrorPlugin = []
+    ErrorWrite = []
+    
+    
+    
+    
+        
