@@ -1,0 +1,48 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import os
+import nuke
+import re
+import nukescripts
+import psutil
+import string
+er1 = ''
+er2 = ''
+ProxyOne = 0
+Readtwo = 0
+Pluginthree = 0
+rootError = 0
+WriteFourth = 2
+ErrorRead = []
+ErrorPlugin = []
+ErrorWrite = []
+p = nuke.root()
+frame = 0
+fill = 4
+MRM = "R:/filmServe/"
+
+ismrm = re.search(MRM,p.name())
+
+def selectConnectedNodes(startNodes):
+    """sel all nodes in the tree of selected node"""
+    
+    allDeps = set()
+    depsList = [startNodes]
+    evaluateAll = True
+    while depsList:
+        deps = nuke.dependencies(depsList)
+        depsList = [i for i in deps if i not in allDeps and not allDeps.add(i)]
+        
+    for i in allDeps:i['selected'].setValue(True)
+    
+    return list(nuke.selectedNodes())
+    
+    
+def get_Disklist():
+    
+    s = str(psutil.disk_partitions())
+    disk_list = []
+    for c in string.ascii_uppercase:
+        disk = c+':'
+        if re.search(disk,s):
+            disk_list.append(disk)
